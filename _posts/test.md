@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 블로그 작성 테스트
-published: false
+published: true
 date: '2020-03-25'
 ---
 가장 큰 제목
