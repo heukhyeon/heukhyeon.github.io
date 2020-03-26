@@ -21,8 +21,8 @@ description: Vidyarthi Developer Blog
 # List of links in the navigation bar
 navbar-links:
   Category:
-    - Server: "/category/server"
     - App: "/category/app"
+    - Server: "/category/server"
 
 # Image to show in the navigation bar - image must be a square (width = height)
 # Remove this parameter if you don't want an image in the navbar
