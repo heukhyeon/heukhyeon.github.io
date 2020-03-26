@@ -2,7 +2,8 @@
 layout: post
 published: true
 categories: [App]
-title: App/Loading Popup
+tags: [Flutter]
+title: Loading Popup
 ---
 
 뭔가 응답 시간이 긴 API를 호출할때는 화면 인터렉션 전체를 차단해야하고, 그냥 놔두면 ANR이나 진배없으니 뭔가 로딩중이라는 팝업을 띄워야한다.
