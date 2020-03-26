@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Private Image
 categories:
   - App
@@ -79,5 +79,3 @@ class MyApp extends StatelessWidget {
 생각나는대로 만들어서 구현하면 어쨌든 생각한대로 구현되는건 좋은데, 너무 대충 만드는 감이 없잖아 있는것같다.
 
 섬네일 계통을 모두 이걸로 한다하면 아예 섬네일 제공자를 여기에 통합하는것도 나쁘지않을것같고...
-
-
