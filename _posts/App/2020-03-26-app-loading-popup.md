@@ -1,7 +1,7 @@
 ---
 layout: post
 published: true
-category: [app]
+categories: [app]
 title: App/Loading Popup
 ---
 
