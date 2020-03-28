@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: GridView JumpToIndex
 categories:
   - App
@@ -73,7 +73,7 @@ tags:
 
 GridView의 width는 실제 앱의 가로 표시 영역과 동일하므로, 대강 이런 류의 계산.
 
-_(((화면 길이 / 4) * 1.15) + 5) * (인덱스 / 4)_
+_(((화면 길이 / 4) * (1.15) + 5) * (인덱스 / 4)_
 
 코드 상으로는 이렇게 구현된다.
 
@@ -149,6 +149,7 @@ Gridview같은 경우는 여기저기 재활용할것같으니 이거 자체를 
 
 ## GridController.dart
 ```
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 // https://heukhyeon.github.io/
@@ -156,12 +157,12 @@ class GridController {
   final int column;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
-  final double aspectRatio;
+  final double aspectRatio; //like  1 / 1.15
   SliverGridDelegate get delegate => SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 4,
-      crossAxisSpacing: 5,
-      mainAxisSpacing: 5,
-      childAspectRatio: 1 / 1.15);
+      crossAxisCount: column,
+      crossAxisSpacing: crossAxisSpacing,
+      mainAxisSpacing: mainAxisSpacing,
+      childAspectRatio: aspectRatio);
 
   ScrollController _scroll = ScrollController();
   ScrollController get scroll => _scroll;
@@ -177,10 +178,12 @@ class GridController {
       assert(aspectRatio != null);
 
   void jumpToIndex({int index, double gridViewWidth}){
+    final column = this.column;
     final width = gridViewWidth - (this.mainAxisSpacing * (column - 1));
-    final oneHeight = ((width / column) * this.aspectRatio) + this.crossAxisSpacing;
-    final line = (index / column);
+    final oneHeight = ((width / column) * (1 / aspectRatio)) + crossAxisSpacing;
+    final line = ((index + 1) / column).floor();
     var offset = oneHeight * line;
+
     if(_scroll.hasClients){
       _scroll.jumpTo(offset);
     }
@@ -188,12 +191,13 @@ class GridController {
       _scroll = ScrollController(initialScrollOffset: offset);
     }
   }
-
+  
   void dispose() {
     _scroll = null;
   }
 
 }
+
 ```
 
 사용 방법은 이런식.
