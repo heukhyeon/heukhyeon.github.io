@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Provider.value와 일반 Provider
 categories:
   - App
@@ -60,7 +60,3 @@ ChangeNotifierProvider(create:(ctx)=>MainPageSelector());
 
 
 배포 레벨에선 별 의미가 없지만 개발단계에서 삐그적 대는 앱이 좋은 앱일거라곤...
-
-
-
-
