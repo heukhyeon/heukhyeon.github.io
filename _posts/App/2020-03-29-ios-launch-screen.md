@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: IOS Launch Screen 업데이트 안됨
 ---
 Flutter로 앱을 구성해도 프로세스가 부팅되는 몇초동안은 [Flutter의 위젯이 아닌 네이티브 (안드로이드 ,IOS)의 화면이 출력된다.](https://flutter.dev/docs/development/ui/splash-screen/android-splash-screen)
@@ -15,7 +15,3 @@ Flutter로 앱을 구성해도 프로세스가 부팅되는 몇초동안은 [Flu
 
 
 글만 봐선 App Store에서 받을땐 발생안한다 카니 그닥 중요한 이슈는 아닌것같다만 묘하게 불편하다.
-
-
-
-
