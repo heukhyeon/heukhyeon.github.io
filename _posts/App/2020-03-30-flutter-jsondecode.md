@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Flutter jsonDecode
 ---
 안드로이드에서 흔히 쓰던 fromJson, toJson이 Flutter에는 jsonDecode, jsonEncode로 내장되어있다.
@@ -102,7 +102,3 @@ List까진 맞는데 이게 String이라 확언을 못하겠다는거.
 ```
 
 한번 더 transform을 명시적으로 해주는식으로 땜빵.
-
-
-
-
