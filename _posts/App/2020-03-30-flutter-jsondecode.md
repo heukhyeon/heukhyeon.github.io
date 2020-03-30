@@ -57,7 +57,7 @@ class GalleryPage {
 
 디버그를 찍어보면 확실히 jsonDecode 했을때의 타입은 ~Map<String,dynamic>이 맞지만, 웃긴건 그래서 내부 타입을 뜯어봤을때의 타입이 다르냐 하면, 그것도 모두 List다.
 
-인터넷에 [관련 이슈] (https://medium.com/codespace69/flutter-json-decode-type-internallinkedhashmap-dynamic-dynamic-is-not-a-subtype-of-type-9d6b3e982b59) 가 있어서 Map.from으로 감싸봤다.
+인터넷에 [관련 이슈](https://medium.com/codespace69/flutter-json-decode-type-internallinkedhashmap-dynamic-dynamic-is-not-a-subtype-of-type-9d6b3e982b59) 가 있어서 Map.from으로 감싸봤다.
 
 ```
   factory GalleryPage.fromObject(Map<String,dynamic> obj){
