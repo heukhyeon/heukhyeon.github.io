@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Flutter Light Dark Brightness
 ---
 안드로이드건, IOS건 상단 StatusBar는 존재한다. 그리고 이 둘의 컨텐츠 (안드로이드는 아이콘, IOS는 일반적으로 현재 시간, 네트워크 상태 등)를 표시하는 색도 Black (안드로이드는 좀 많이 미묘하지만) 이나 White로 동일하다.
@@ -30,6 +30,7 @@ MaterialApp(
 ### 3. AppBar 생성자에 Brightness 주입
 - 3과 더불어 가장 많이 쓰이는 방법.
 - 그리고 언제나 따라오는 '나 앱바 안쓸건데 그럼 어떻게 함?' 이라는 질문.
+- PreferredSize(height:0 child:AppBar())라는 엽기적인 놈도 봤다.
 
 방법들에 대해서는 딱히 길게 적을게 없고, 내가 쓰려는건 좀 해맨게 있어서다.
 
@@ -37,21 +38,48 @@ MaterialApp(
 
 ![white_status.PNG]({{site.baseurl}}/img/white_status.PNG)
 
-이 이미지를 보자, 이 이미지의 status bar icon의 Brightness는 뭘까?
+brightness가 '테마에 맞는' 값이라 생각해서 위 이미지의 경우 brightness가 dark일거라 생각했고
 
-IOS를 생각하면 자연스럽게 dark라 생각하게 될텐데....대체 왜 인지 알수없지만, light다.
+
 
 ![dark_status.PNG]({{site.baseurl}}/img/dark_status.PNG)
 
-그러니 이것도 색만 봐선 light라 생각하겠지만, dark다.
-
-IOS는 '해당 상태일때 표시되기 적절한' 것에 대한 정의고,
-안드로이드는 '해당 상태로 표시된 ' 것에 대한 정의인지 뭔지...
-
-하나 짐작이 드는건 안드로이드의 경우 light status bar ( 아이콘이 검게 나오는) 자체가 dark status bar ( 아이콘이 희게 나오는) 것보다 나중에 나오다보니 IOS랑 반대로 간건가 싶기도.
+마찬가지로 밝은 화면에 맞는 색이니 light일거라 생각했는데, 반대라는것.
 
 
-...그런데 웃기는게, 이게 또 3에는 적용되지 않는다. 1도 사실상 2와 같은 맥락이니 SystemUIOverlayStyle의 문제라는것.
+코드를 보면 사실 이해가 되긴 한다.
+
+## system_chrome.dart (Flutter Offical)
+```
+  /// System overlays should be drawn with a light color. Intended for
+  /// applications with a dark background.
+  static const SystemUiOverlayStyle light = SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFF000000),
+    systemNavigationBarDividerColor: null,
+    statusBarColor: null,
+    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+  );
+
+  /// System overlays should be drawn with a dark color. Intended for
+  /// applications with a light background.
+  static const SystemUiOverlayStyle dark = SystemUiOverlayStyle(
+    systemNavigationBarColor: Color(0xFF000000),
+    systemNavigationBarDividerColor: null,
+    statusBarColor: null,
+    systemNavigationBarIconBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+    statusBarBrightness: Brightness.light,
+  );
+```
+
+오버레이를 '그리는' 색상이 light인지 dark인지를 정의한다. 
+
+
+
+
+재밌는건 AppBar는 이게 또 반대다. 얘는 내가 생각한대로 '화면 밝기에 맞게끔' status bar를 조정한다.
 
 ```
 AppBarTheme(
@@ -61,31 +89,8 @@ AppBarTheme(
 
 AppBar의 brightness의 경우 light 일경우 아이콘이 검게 나오고, dark 일경우 하얗게 나온다.
 
-뭐야 이게?
+...테마라는건 참 알다가도 모르겠다.
 
-
-찾다보니 [이미 있는 이슈다.](https://github.com/flutter/flutter/issues/17523) 근데 닫혔다 나오는데?
-
-
-```
-[√] Flutter (Channel stable, v1.12.13+hotfix.8, on Microsoft Windows [Version 10.0.18362.720], locale ko-KR)
-    • Flutter version 1.12.13+hotfix.8 at C:\Users\heukh\Documents\flutter\flutter
-    • Framework revision 0b8abb4724 (7 weeks ago), 2020-02-11 11:44:36 -0800
-    • Engine revision e1e6ced81d
-    • Dart version 2.7.0
-
-```
-
-나중에 '내가 할땐 제대로 되는데 왜 딴소리임?'이라 할것 같으니 버전을 적어둔다.
-
-[이 이슈](https://github.com/flutter/flutter/issues/41256) 에서는 또 반대로 작동하는 모양이니 내가 이상한것 같기도 하고....
-
-
-뭐여 이게...
-
-이게 됫든 저게 됫던 AppBar를 먹이면 의도한대로 돌아간다. 앱바가 없을때 문제지...
-
-어떤 글에선 height 0짜리 앱바를 만드는 글도 봣는데 참...
 
 
 
