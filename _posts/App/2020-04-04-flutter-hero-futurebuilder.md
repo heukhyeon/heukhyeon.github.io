@@ -1,6 +1,6 @@
 ---
 layout: post
-published: false
+published: true
 title: Flutter Hero와 FutureBuilder
 ---
 페이지간 이동할때, Hero 위젯을 쓰면 해당 위젯끼리 전환되는 꽤나 멋들어진 효과가 난다.
