@@ -2,6 +2,10 @@
 layout: post
 published: true
 title: Flutter jsonDecode
+categories:
+  - App
+tags:
+  - Flutter
 ---
 안드로이드에서 흔히 쓰던 fromJson, toJson이 Flutter에는 jsonDecode, jsonEncode로 내장되어있다.
 
